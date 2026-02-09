@@ -22,7 +22,7 @@ type Database struct {
 var CfgStruct Config
 
 func LoadConfig() (*Config, error) {
-	err := cleanenv.ReadConfig("config/config.yml", &CfgStruct)
+	err := cleanenv.ReadConfig("pkg/config/config.yml", &CfgStruct)
 	if err != nil {
 		return nil, err
 	}
