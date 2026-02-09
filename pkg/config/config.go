@@ -16,7 +16,7 @@ type HttpServer struct {
 }
 
 type Database struct {
-	FilePath string `env:"TODO_DBFILE" env-default:"default.db"`
+	FilePath string `env:"TODO_DBFILE" env-default:"scheduler.db"`
 }
 
 var CfgStruct Config
