@@ -1,0 +1,14 @@
+
+services:
+  todo-app:
+    image: todo-image
+    ports:
+      - "${TODO_PORT}:${TODO_PORT}"
+    volumes:
+      - "./data:/data"
+    environment:
+      - TODO_DBFILE=${TODO_DBFILE}
+      - TODO_PASSWORD=${TODO_PASSWORD}
+      - TODO_PORT=${TODO_PORT}
+      - TODO_IP=${TODO_IP}
+      
