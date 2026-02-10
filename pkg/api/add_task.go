@@ -3,6 +3,7 @@ package api
 import (
 	"bytes"
 	"encoding/json"
+	"log"
 	"net/http"
 	"time"
 
@@ -123,7 +124,10 @@ func writeJson(w http.ResponseWriter, data any) {
 
 	}
 
-	w.Write(jsonData)
+	_, err = w.Write(jsonData)
+	if err != nil {
+		log.Printf("Error writing JSON response: %v", err)
+	}
 
 }
 
