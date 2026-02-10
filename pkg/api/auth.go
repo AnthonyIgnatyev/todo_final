@@ -33,6 +33,7 @@ func signInHandler(w http.ResponseWriter, r *http.Request) {
 
 	if req.Password != password {
 		writeJsonError(w, "Wrong password", http.StatusUnauthorized)
+		return
 	}
 
 	jwtToken := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{

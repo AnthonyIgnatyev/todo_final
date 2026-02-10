@@ -14,6 +14,31 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func loginAndGetToken(t *testing.T) string {
+	body, err := requestJSON("api/signin", map[string]any{
+		"password": "admin",
+	}, http.MethodPost)
+
+	if err != nil {
+		t.Fatalf("Login error: %v", err)
+	}
+
+	var response map[string]string
+	if err := json.Unmarshal(body, &response); err != nil {
+		t.Fatalf("Answer error: %v", err)
+	}
+
+	token, ok := response["token"]
+	if !ok {
+		t.Fatal("Token not found")
+	}
+
+	Token = token
+	//t.Logf("Token received: %s...", token[:20])
+
+	return token
+}
+
 func requestJSON(apipath string, values map[string]any, method string) ([]byte, error) {
 	var (
 		data []byte
@@ -84,6 +109,8 @@ type task struct {
 func TestAddTask(t *testing.T) {
 	db := openDB(t)
 	defer db.Close()
+
+	_ = loginAndGetToken(t)
 
 	tbl := []task{
 		{"20240129", "", "", ""},
