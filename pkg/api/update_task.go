@@ -10,8 +10,6 @@ import (
 )
 
 func updateTaskHandler(w http.ResponseWriter, r *http.Request) {
-	defer r.Body.Close()
-
 	var task db.Task
 	var buf bytes.Buffer
 

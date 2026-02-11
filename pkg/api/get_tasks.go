@@ -25,8 +25,6 @@ func tasksHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func getTaskHandler(w http.ResponseWriter, r *http.Request) {
-	defer r.Body.Close()
-
 	if !r.URL.Query().Has("id") {
 		writeJsonError(w, "The ID parameter can't be empty", http.StatusBadRequest)
 		return
